@@ -3,6 +3,8 @@ import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
+import { zh } from 'payload/i18n/zh'
+import { en } from 'payload/i18n/en'
 
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
@@ -56,6 +58,10 @@ export default buildConfig({
     },
   },
   // This config helps us configure global or default features that the other editors can inherit
+  i18n: {
+    supportedLanguages: { en, zh }, // or { zh, en } doesn't strictly matter if keys are used, but good to have both
+    fallbackLanguage: 'zh', // default to Chinese
+  },
   editor: defaultLexical,
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
