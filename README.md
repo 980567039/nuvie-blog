@@ -1,250 +1,250 @@
-# Payload Website Template
+# Payload 网站模板
 
-This is the official [Payload Website Template](https://github.com/payloadcms/payload/blob/main/templates/website). Use it to power websites, blogs, or portfolios from small to enterprise. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
+这是官方的 [Payload 网站模板](https://github.com/payloadcms/payload/blob/main/templates/website)。你可以用它来驱动从小型到企业级的网站、博客或作品集。此代码库包含一个功能齐全的后端、企业级管理面板以及一个设计精美、可用于生产环境的网站。
 
-This template is right for you if you are working on:
+此模板适合你，如果你正在开发：
 
-- A personal or enterprise-grade website, blog, or portfolio
-- A content publishing platform with a fully featured publication workflow
-- Exploring the capabilities of Payload
+- 个人或企业级网站、博客或作品集
+- 具有全功能发布工作流的内容发布平台
+- 探索 Payload 的能力
 
-Core features:
+核心功能：
 
-- [Pre-configured Payload Config](#how-it-works)
-- [Authentication](#users-authentication)
-- [Access Control](#access-control)
-- [Layout Builder](#layout-builder)
-- [Draft Preview](#draft-preview)
-- [Live Preview](#live-preview)
-- [On-demand Revalidation](#on-demand-revalidation)
+- [预配置的 Payload 配置](#工作原理)
+- [认证](#用户认证)
+- [访问控制](#访问控制)
+- [布局构建器](#布局构建器)
+- [草稿预览](#草稿预览)
+- [实时预览](#实时预览)
+- [按需重新验证](#按需重新验证)
 - [SEO](#seo)
-- [Search](#search)
-- [Redirects](#redirects)
-- [Jobs and Scheduled Publishing](#jobs-and-scheduled-publish)
-- [Website](#website)
+- [搜索](#搜索)
+- [重定向](#重定向)
+- [任务和定时发布](#任务和定时发布)
+- [网站](#网站)
 
-## Quick Start
+## 快速开始
 
-To spin up this example locally, follow these steps:
+要在本地启动此示例，请按照以下步骤操作：
 
-### Clone
+### 克隆
 
-If you have not done so already, you need to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+如果你还没有这样做，你需要在你的机器上拥有此代码库的独立副本。如果你已经克隆了此代码库，请跳至 [开发](#开发)。
 
-Use the `create-payload-app` CLI to clone this template directly to your machine:
+使用 `create-payload-app` CLI 将此模板直接克隆到你的机器：
 
 ```bash
 pnpx create-payload-app my-project -t website
 ```
 
-### Development
+### 开发
 
-1. First [clone the repo](#clone) if you have not done so already
-1. `cd my-project && cp .env.example .env` to copy the example environment variables
-1. `pnpm install && pnpm dev` to install dependencies and start the dev server
-1. open `http://localhost:3000` to open the app in your browser
+1. 首先 [克隆代码库](#克隆)（如果尚未克隆）。
+2. `cd my-project && cp .env.example .env` 复制示例环境变量。
+3. `pnpm install && pnpm dev` 安装依赖项并启动开发服务器。
+4. 打开 `http://localhost:3000` 在浏览器中访问应用程序。
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+就是这样！在 `./src` 中所做的更改将反映在你的应用程序中。按照屏幕上的说明登录并创建你的第一个管理员用户。准备好构建和提供应用程序服务时，请查看 [生产环境](#生产环境)；准备好上线时，请查看 [部署](#部署)。
 
-## How it works
+## 工作原理
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+Payload 配置专门针对大多数网站的需求进行了定制。它以以下方式进行了预配置：
 
-### Collections
+### 集合
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+有关如何扩展此功能的详细信息，请参阅 [集合](https://payloadcms.com/docs/configuration/collections) 文档。
 
-- #### Users (Authentication)
+- #### 用户 (认证)
 
-  Users are auth-enabled collections that have access to the admin panel and unpublished content. See [Access Control](#access-control) for more details.
+  用户是启用了认证的集合，可以访问管理面板和未发布的内容。有关更多详细信息，请参阅 [访问控制](#访问控制)。
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+  如需更多帮助，请参阅官方 [认证示例](https://github.com/payloadcms/payload/tree/main/examples/auth) 或 [认证](https://payloadcms.com/docs/authentication/overview#authentication-overview) 文档。
 
-- #### Posts
+- #### 文章 (Posts)
 
-  Posts are used to generate blog posts, news articles, or any other type of content that is published over time. All posts are layout builder enabled so you can generate unique layouts for each post using layout-building blocks, see [Layout Builder](#layout-builder) for more details. Posts are also draft-enabled so you can preview them before publishing them to your website, see [Draft Preview](#draft-preview) for more details.
+  文章用于生成博客文章、新闻报道或任何其他随时间发布的内容。所有文章都启用了布局构建器，因此你可以使用布局构建块为每篇文章生成独特的布局，有关更多详细信息，请参阅 [布局构建器](#布局构建器)。文章还启用了草稿功能，因此你可以在发布到网站之前预览它们，有关更多详细信息，请参阅 [草稿预览](#草稿预览)。
 
-- #### Pages
+- #### 页面 (Pages)
 
-  All pages are layout builder enabled so you can generate unique layouts for each page using layout-building blocks, see [Layout Builder](#layout-builder) for more details. Pages are also draft-enabled so you can preview them before publishing them to your website, see [Draft Preview](#draft-preview) for more details.
+  所有页面都启用了布局构建器，因此你可以使用布局构建块为每个页面生成独特的布局，有关更多详细信息，请参阅 [布局构建器](#布局构建器)。页面还启用了草稿功能，因此你可以在发布到网站之前预览它们，有关更多详细信息，请参阅 [草稿预览](#草稿预览)。
 
-- #### Media
+- #### 媒体 (Media)
 
-  This is the uploads enabled collection used by pages, posts, and projects to contain media like images, videos, downloads, and other assets. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+  这是页面、文章和项目用于包含图像、视频、下载和其他资产的启用上传的集合。它具有预配置的尺寸、焦点和手动调整大小功能，以帮助你管理图片。
 
-- #### Categories
+- #### 分类 (Categories)
 
-  A taxonomy used to group posts together. Categories can be nested inside of one another, for example "News > Technology". See the official [Payload Nested Docs Plugin](https://payloadcms.com/docs/plugins/nested-docs) for more details.
+  用于将文章分组在一起的分类法。分类可以嵌套在彼此内部，例如“新闻 > 技术”。有关更多详细信息，请参阅官方 [Payload 嵌套文档插件](https://payloadcms.com/docs/plugins/nested-docs)。
 
-### Globals
+### 全局变量
 
-See the [Globals](https://payloadcms.com/docs/configuration/globals) docs for details on how to extend this functionality.
+有关如何扩展此功能的详细信息，请参阅 [全局变量](https://payloadcms.com/docs/configuration/globals) 文档。
 
-- `Header`
+- `Header` (页眉)
 
-  The data required by the header on your front-end like nav links.
+  前端页眉所需的数据，如导航链接。
 
-- `Footer`
+- `Footer` (页脚)
 
-  Same as above but for the footer of your site.
+  同上，但用于网站的页脚。
 
-## Access control
+## 访问控制
 
-Basic access control is setup to limit access to various content based based on publishing status.
+设置了基本的访问控制，以根据发布状态限制对各种内容的访问。
 
-- `users`: Users can access the admin panel and create or edit content.
-- `posts`: Everyone can access published posts, but only users can create, update, or delete them.
-- `pages`: Everyone can access published pages, but only users can create, update, or delete them.
+- `users`: 用户可以访问管理面板并创建或编辑内容。
+- `posts`: 所有人都可以访问已发布的文章，但只有用户可以创建、更新或删除它们。
+- `pages`: 所有人都可以访问已发布的页面，但只有用户可以创建、更新或删除它们。
 
-For more details on how to extend this functionality, see the [Payload Access Control](https://payloadcms.com/docs/access-control/overview#access-control) docs.
+有关如何扩展此功能的更多详细信息，请参阅 [Payload 访问控制](https://payloadcms.com/docs/access-control/overview#access-control) 文档。
 
-## Layout Builder
+## 布局构建器
 
-Create unique page layouts for any type of content using a powerful layout builder. This template comes pre-configured with the following layout building blocks:
+使用强大的布局构建器为任何类型的内容创建独特的页面布局。此模板预先配置了以下布局构建块：
 
-- Hero
-- Content
-- Media
-- Call To Action
-- Archive
+- Hero (主视觉)
+- Content (内容)
+- Media (媒体)
+- Call To Action (行动号召)
+- Archive (归档)
 
-Each block is fully designed and built into the front-end website that comes with this template. See [Website](#website) for more details.
+每个块都经过精心设计并内置于此模板附带的前端网站中。有关更多详细信息，请参阅 [网站](#网站)。
 
-## Lexical editor
+## Lexical 编辑器
 
-A deep editorial experience that allows complete freedom to focus just on writing content without breaking out of the flow with support for Payload blocks, media, links and other features provided out of the box. See [Lexical](https://payloadcms.com/docs/rich-text/overview) docs.
+深度的编辑体验，允许完全自由地专注于编写内容，而不会脱离流程，支持 Payload 块、媒体、链接和开箱即用的其他功能。请参阅 [Lexical](https://payloadcms.com/docs/rich-text/overview) 文档。
 
-## Draft Preview
+## 草稿预览
 
-All posts and pages are draft-enabled so you can preview them before publishing them to your website. To do this, these collections use [Versions](https://payloadcms.com/docs/configuration/collections#versions) with `drafts` set to `true`. This means that when you create a new post, project, or page, it will be saved as a draft and will not be visible on your website until you publish it. This also means that you can preview your draft before publishing it to your website. To do this, we automatically format a custom URL which redirects to your front-end to securely fetch the draft version of your content.
+所有文章和页面都启用了草稿功能，因此你可以在发布到网站之前预览它们。为此，这些集合使用 [版本](https://payloadcms.com/docs/configuration/collections#versions)，并将 `drafts` 设置为 `true`。这意味着当你创建新文章、项目或页面时，它将保存为草稿，在你发布之前不会在你的网站上可见。这也意味着你可以在发布到网站之前预览草稿。为此，我们会自动格式化一个自定义 URL，该 URL 重定向到你的前端以安全地获取内容的草稿版本。
 
-Since the front-end of this template is statically generated, this also means that pages, posts, and projects will need to be regenerated as changes are made to published documents. To do this, we use an `afterChange` hook to regenerate the front-end when a document has changed and its `_status` is `published`.
+由于此模板的前端是静态生成的，这也意味着随着对已发布文档的更改，页面、文章和项目将需要重新生成。为此，我们使用 `afterChange` 钩子在文档已更改且其 `_status` 为 `published` 时重新生成前端。
 
-For more details on how to extend this functionality, see the official [Draft Preview Example](https://github.com/payloadcms/payload/tree/examples/draft-preview).
+有关如何扩展此功能的更多详细信息，请参阅官方 [草稿预览示例](https://github.com/payloadcms/payload/tree/examples/draft-preview)。
 
-## Live preview
+## 实时预览
 
-In addition to draft previews you can also enable live preview to view your end resulting page as you're editing content with full support for SSR rendering. See [Live preview docs](https://payloadcms.com/docs/live-preview/overview) for more details.
+除了草稿预览之外，你还可以启用实时预览，以便在编辑内容时查看最终结果页面，并完全支持 SSR 渲染。有关更多详细信息，请参阅 [实时预览文档](https://payloadcms.com/docs/live-preview/overview)。
 
-## On-demand Revalidation
+## 按需重新验证
 
-We've added hooks to collections and globals so that all of your pages, posts, footer, or header changes will automatically be updated in the frontend via on-demand revalidation supported by Nextjs.
+我们已向集合和全局变量添加了钩子，以便通过 Next.js 支持的按需重新验证，在前端自动更新你的所有页面、文章、页脚或页眉更改。
 
-> Note: if an image has been changed, for example it's been cropped, you will need to republish the page it's used on in order to be able to revalidate the Nextjs image cache.
+> 注意：如果图像已更改（例如已被裁剪），你需要重新发布使用了该图像的页面，以便能够重新验证 Next.js 图像缓存。
 
 ## SEO
 
-This template comes pre-configured with the official [Payload SEO Plugin](https://payloadcms.com/docs/plugins/seo) for complete SEO control from the admin panel. All SEO data is fully integrated into the front-end website that comes with this template. See [Website](#website) for more details.
+此模板预先配置了官方 [Payload SEO 插件](https://payloadcms.com/docs/plugins/seo)，用于从管理面板进行完整的 SEO 控制。所有 SEO 数据都完全集成到此模板附带的前端网站中。有关更多详细信息，请参阅 [网站](#网站)。
 
-## Search
+## 搜索
 
-This template also pre-configured with the official [Payload Search Plugin](https://payloadcms.com/docs/plugins/search) to showcase how SSR search features can easily be implemented into Next.js with Payload. See [Website](#website) for more details.
+此模板还预先配置了官方 [Payload 搜索插件](https://payloadcms.com/docs/plugins/search)，以展示如何轻松地将 SSR 搜索功能通过 Payload 实现到 Next.js 中。有关更多详细信息，请参阅 [网站](#网站)。
 
-## Redirects
+## 重定向
 
-If you are migrating an existing site or moving content to a new URL, you can use the `redirects` collection to create a proper redirect from old URLs to new ones. This will ensure that proper request status codes are returned to search engines and that your users are not left with a broken link. This template comes pre-configured with the official [Payload Redirects Plugin](https://payloadcms.com/docs/plugins/redirects) for complete redirect control from the admin panel. All redirects are fully integrated into the front-end website that comes with this template. See [Website](#website) for more details.
+如果你正在迁移现有网站或将内容移动到新 URL，可以使用 `redirects` 集合创建从旧 URL 到新 URL 的适当重定向。这将确保向搜索引擎返回正确的请求状态代码，并且你的用户不会遇到断链。此模板预先配置了官方 [Payload 重定向插件](https://payloadcms.com/docs/plugins/redirects)，用于从管理面板进行完全的重定向控制。所有重定向都完全集成到此模板附带的前端网站中。有关更多详细信息，请参阅 [网站](#网站)。
 
-## Jobs and Scheduled Publish
+## 任务和定时发布
 
-We have configured [Scheduled Publish](https://payloadcms.com/docs/versions/drafts#scheduled-publish) which uses the [jobs queue](https://payloadcms.com/docs/jobs-queue/jobs) in order to publish or unpublish your content on a scheduled time. The tasks are run on a cron schedule and can also be run as a separate instance if needed.
+我们配置了 [定时发布](https://payloadcms.com/docs/versions/drafts#scheduled-publish)，它使用 [任务队列](https://payloadcms.com/docs/jobs-queue/jobs) 以便在预定时间发布或取消发布你的内容。这些任务按 cron 计划运行，如果需要，也可以作为单独的实例运行。
 
-> Note: When deployed on Vercel, depending on the plan tier, you may be limited to daily cron only.
+> 注意：当部署在 Vercel 上时，根据计划层级，你可能仅限于每日 cron。
 
-## Website
+## 网站
 
-This template includes a beautifully designed, production-ready front-end built with the [Next.js App Router](https://nextjs.org), served right alongside your Payload app in a instance. This makes it so that you can deploy both your backend and website where you need it.
+此模板包含一个设计精美、可用于生产环境的前端，使用 [Next.js App Router](https://nextjs.org) 构建，与你的 Payload 应用程序在一个实例中同时提供服务。这使得你可以在需要的地方同时部署后端和网站。
 
-Core features:
+核心功能：
 
 - [Next.js App Router](https://nextjs.org)
 - [TypeScript](https://www.typescriptlang.org)
 - [React Hook Form](https://react-hook-form.com)
 - [Payload Admin Bar](https://github.com/payloadcms/payload/tree/main/packages/admin-bar)
-- [TailwindCSS styling](https://tailwindcss.com/)
-- [shadcn/ui components](https://ui.shadcn.com/)
-- User Accounts and Authentication
-- Fully featured blog
-- Publication workflow
-- Dark mode
-- Pre-made layout building blocks
+- [TailwindCSS 样式](https://tailwindcss.com/)
+- [shadcn/ui 组件](https://ui.shadcn.com/)
+- 用户账户和认证
+- 功能齐全的博客
+- 发布工作流
+- 深色模式
+- 预制的布局构建块
 - SEO
-- Search
-- Redirects
-- Live preview
+- 搜索
+- 重定向
+- 实时预览
 
-### Cache
+### 缓存
 
-Although Next.js includes a robust set of caching strategies out of the box, Payload Cloud proxies and caches all files through Cloudflare using the [Official Cloud Plugin](https://www.npmjs.com/package/@payloadcms/payload-cloud). This means that Next.js caching is not needed and is disabled by default. If you are hosting your app outside of Payload Cloud, you can easily reenable the Next.js caching mechanisms by removing the `no-store` directive from all fetch requests in `./src/app/_api` and then removing all instances of `export const dynamic = 'force-dynamic'` from pages files, such as `./src/app/(pages)/[slug]/page.tsx`. For more details, see the official [Next.js Caching Docs](https://nextjs.org/docs/app/building-your-application/caching).
+虽然 Next.js 开箱即用地包含一套强大的缓存策略，但 Payload Cloud 通过使用 [官方 Cloud 插件](https://www.npmjs.com/package/@payloadcms/payload-cloud) 通过 Cloudflare 代理和缓存所有文件。这意味着不需要 Next.js 缓存，并且默认情况下已禁用。如果你在 Payload Cloud 之外托管你的应用程序，你可以通过从 `./src/app/_api` 中的所有获取请求中删除 `no-store` 指令，然后从页面文件中（例如 `./src/app/(pages)/[slug]/page.tsx`）删除所有 `export const dynamic = 'force-dynamic'` 实例，轻松重新启用 Next.js 缓存机制。有关更多详细信息，请参阅官方 [Next.js 缓存文档](https://nextjs.org/docs/app/building-your-application/caching)。
 
-## Development
+## 开发
 
-To spin up this example locally, follow the [Quick Start](#quick-start). Then [Seed](#seed) the database with a few pages, posts, and projects.
+要在本地启动此示例，请按照 [快速开始](#快速开始) 操作。然后 [填充 (Seed)](#填充数据) 数据库，其中包含一些页面、文章和项目。
 
-### Working with Postgres
+### 使用 Postgres
 
-Postgres and other SQL-based databases follow a strict schema for managing your data. In comparison to our MongoDB adapter, this means that there's a few extra steps to working with Postgres.
+Postgres 和其他基于 SQL 的数据库遵循严格的架构来管理你的数据。与我们的 MongoDB 适配器相比，这意味着使用 Postgres 需要一些额外的步骤。
 
-Note that often times when making big schema changes you can run the risk of losing data if you're not manually migrating it.
+请注意，在进行大型架构更改时，如果不手动迁移数据，通常会面临丢失数据的风险。
 
-#### Local development
+#### 本地开发
 
-Ideally we recommend running a local copy of your database so that schema updates are as fast as possible. By default the Postgres adapter has `push: true` for development environments. This will let you add, modify and remove fields and collections without needing to run any data migrations.
+理想情况下，我们建议运行数据库的本地副本，以便架构更新尽可能快。默认情况下，Postgres 适配器在开发环境中具有 `push: true`。这将允许你添加、修改和删除字段和集合，而无需运行任何数据迁移。
 
-If your database is pointed to production you will want to set `push: false` otherwise you will risk losing data or having your migrations out of sync.
+如果你的数据库指向生产环境，你将需要设置 `push: false`，否则你将面临丢失数据或迁移不同步的风险。
 
-#### Migrations
+#### 迁移
 
-[Migrations](https://payloadcms.com/docs/database/migrations) are essentially SQL code versions that keeps track of your schema. When deploy with Postgres you will need to make sure you create and then run your migrations.
+[迁移 (Migrations)](https://payloadcms.com/docs/database/migrations) 本质上是 SQL 代码版本，用于跟踪你的架构。在使用 Postgres 部署时，你需要确保创建并运行迁移。
 
-Locally create a migration
+在本地创建迁移
 
 ```bash
 pnpm payload migrate:create
 ```
 
-This creates the migration files you will need to push alongside with your new configuration.
+这将创建你需要随新配置一起推送的迁移文件。
 
-On the server after building and before running `pnpm start` you will want to run your migrations
+在构建之后并在运行 `pnpm start` 之前，你需要在服务器上运行迁移
 
 ```bash
 pnpm payload migrate
 ```
 
-This command will check for any migrations that have not yet been run and try to run them and it will keep a record of migrations that have been run in the database.
+此命令将检查尚未运行的任何迁移并尝试运行它们，并且它将在数据库中保留已运行迁移的记录。
 
 ### Docker
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+或者，你可以使用 [Docker](https://www.docker.com) 在本地启动此模板。为此，请按照以下步骤操作：
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+1. 按照 [上面的步骤 1 和 2](#开发)，docker-compose 文件将自动使用项目根目录中的 `.env` 文件
+2. 接下来运行 `docker-compose up`
+3. 按照 [上面的步骤 4 和 5](#开发) 登录并创建你的第一个管理员用户
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+就是这样！Docker 实例将帮助你快速启动并运行，同时也使团队之间的开发环境标准化。
 
-### Seed
+### 填充数据 (Seed)
 
-To seed the database with a few pages, posts, and projects you can click the 'seed database' link from the admin panel.
+要使用一些页面、文章和项目填充数据库，你可以点击管理面板中的“seed database”链接。
 
-The seed script will also create a demo user for demonstration purposes only:
+种子脚本还将创建一个仅用于演示目的的演示用户：
 
-- Demo Author
-  - Email: `demo-author@payloadcms.com`
-  - Password: `password`
+- 演示作者
+  - 邮箱: `demo-author@payloadcms.com`
+  - 密码: `password`
 
-> NOTICE: seeding the database is destructive because it drops your current database to populate a fresh one from the seed template. Only run this command if you are starting a new project or can afford to lose your current data.
+> 注意：填充数据库具有破坏性，因为它会删除当前数据库以从种子模板填充一个新数据库。仅当你正在开始新项目或可以承受丢失当前数据时才运行此命令。
 
-## Production
+## 生产环境
 
-To run Payload in production, you need to build and start the Admin panel. To do so, follow these steps:
+要在生产环境中运行 Payload，你需要构建并启动管理面板。为此，请按照以下步骤操作：
 
-1. Invoke the `next build` script by running `pnpm build` or `npm run build` in your project root. This creates a `.next` directory with a production-ready admin bundle.
-1. Finally run `pnpm start` or `npm run start` to run Node in production and serve Payload from the `.build` directory.
-1. When you're ready to go live, see Deployment below for more details.
+1. 通过在项目根目录中运行 `pnpm build` 或 `npm run build` 来调用 `next build` 脚本。这将创建一个带有生产就绪管理包的 `.next` 目录。
+2. 最后运行 `pnpm start` 或 `npm run start` 以在生产环境中运行 Node 并从 `.build` 目录提供 Payload 服务。
+3. 当你准备好上线时，请参阅下面的“部署”以获取更多详细信息。
 
-### Deploying to Vercel
+### 部署到 Vercel
 
-This template can also be deployed to Vercel for free. You can get started by choosing the Vercel DB adapter during the setup of the template or by manually installing and configuring it:
+此模板也可以免费部署到 Vercel。你可以通过在模板设置期间选择 Vercel DB 适配器或手动安装和配置它来开始：
 
 ```bash
 pnpm add @payloadcms/db-vercel-postgres
@@ -264,7 +264,7 @@ export default buildConfig({
   // ...
 ```
 
-We also support Vercel's blob storage:
+我们还支持 Vercel 的 blob 存储：
 
 ```bash
 pnpm add @payloadcms/storage-vercel-blob
@@ -287,17 +287,17 @@ export default buildConfig({
   // ...
 ```
 
-There is also a simplified [one click deploy](https://github.com/payloadcms/payload/tree/templates/with-vercel-postgres) to Vercel should you need it.
+如果你需要，还有一个简化的 [一键部署](https://github.com/payloadcms/payload/tree/templates/with-vercel-postgres) 到 Vercel。
 
-### Self-hosting
+### 自托管
 
-Before deploying your app, you need to:
+在部署应用程序之前，你需要：
 
-1. Ensure your app builds and serves in production. See [Production](#production) for more details.
-2. You can then deploy Payload as you would any other Node.js or Next.js application either directly on a VPS, DigitalOcean's Apps Platform, via Coolify or more. More guides coming soon.
+1. 确保你的应用程序在生产环境中构建并提供服务。有关更多详细信息，请参阅 [生产环境](#生产环境)。
+2. 然后，你可以像部署任何其他 Node.js 或 Next.js 应用程序一样部署 Payload，可以直接部署在 VPS、DigitalOcean 的 Apps Platform 上，通过 Coolify 部署或更多方式。更多指南即将推出。
 
-You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
+你也可以手动部署应用程序，查看 [部署文档](https://payloadcms.com/docs/production/deployment) 了解完整详情。
 
-## Questions
+## 问题
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+如果你有任何问题或疑问，请在 [Discord](https://discord.com/invite/payload) 上联系我们或发起 [GitHub 讨论](https://github.com/payloadcms/payload/discussions)。
