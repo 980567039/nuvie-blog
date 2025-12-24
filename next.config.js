@@ -18,6 +18,10 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      {
+        protocol: 'https',
+        hostname: '*.r2.dev',
+      },
     ],
   },
   webpack: (webpackConfig) => {

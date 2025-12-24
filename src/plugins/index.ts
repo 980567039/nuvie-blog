@@ -3,6 +3,7 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -51,8 +52,10 @@ export const plugins: Plugin[] = [
     generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
   }),
   seoPlugin({
+    collections: ['posts', 'pages'],
     generateTitle,
     generateURL,
+    uploadsCollection: 'media',
   }),
   formBuilderPlugin({
     fields: {
@@ -89,4 +92,29 @@ export const plugins: Plugin[] = [
       },
     },
   }),
+  // Cloudflare R2 Storage (S3-compatible)
+  ...(process.env.R2_BUCKET
+    ? [
+        s3Storage({
+          collections: {
+            media: {
+              prefix: 'media',
+              generateFileURL: ({ filename, prefix }) => {
+                return `${process.env.R2_PUBLIC_URL}/${prefix}/${filename}`
+              },
+            },
+          },
+          bucket: process.env.R2_BUCKET,
+          config: {
+            credentials: {
+              accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
+              secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
+            },
+            region: 'auto',
+            endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+          },
+        }),
+      ]
+    : []),
 ]
+
