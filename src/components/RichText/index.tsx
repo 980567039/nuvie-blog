@@ -53,6 +53,18 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
   },
+  inlineBlocks: {
+    mediaBlock: ({ node }: { node: SerializedBlockNode<MediaBlockProps> }) => (
+      <MediaBlock
+        className="col-start-1 col-span-3"
+        imgClassName="m-0"
+        {...node.fields}
+        captionClassName="mx-auto max-w-[48rem]"
+        enableGutter={false}
+        disableInnerContainer={true}
+      />
+    ),
+  },
 })
 
 type Props = {
