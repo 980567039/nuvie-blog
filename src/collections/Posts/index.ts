@@ -42,6 +42,10 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    publishedAt: true,
+    createdAt: true,
+    heroImage: true,
+    populatedAuthors: true,
     meta: {
       image: true,
       description: true,
