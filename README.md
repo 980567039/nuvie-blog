@@ -26,10 +26,6 @@
 
 就是这样！在 `./src` 中所做的更改将反映在你的应用程序中。按照屏幕上的说明登录并创建你的第一个管理员用户。准备好构建和提供应用程序服务时，请查看 [生产环境](#生产环境)；准备好上线时，请查看 [部署](#部署)。
 
-## 工作原理
-
-Payload 配置专门针对大多数网站的需求进行了定制。它以以下方式进行了预配置：
-
 ### 集合
 
 有关如何扩展此功能的详细信息，请参阅 [集合](https://payloadcms.com/docs/configuration/collections) 文档。
@@ -37,8 +33,6 @@ Payload 配置专门针对大多数网站的需求进行了定制。它以以下
 - #### 用户 (认证)
 
   用户是启用了认证的集合，可以访问管理面板和未发布的内容。有关更多详细信息，请参阅 [访问控制](#访问控制)。
-
-  如需更多帮助，请参阅官方 [认证示例](https://github.com/payloadcms/payload/tree/main/examples/auth) 或 [认证](https://payloadcms.com/docs/authentication/overview#authentication-overview) 文档。
 
 - #### 文章 (Posts)
 
@@ -208,70 +202,11 @@ pnpm payload migrate
 
 > 注意：填充数据库具有破坏性，因为它会删除当前数据库以从种子模板填充一个新数据库。仅当你正在开始新项目或可以承受丢失当前数据时才运行此命令。
 
-## 生产环境
-
-要在生产环境中运行 Payload，你需要构建并启动管理面板。为此，请按照以下步骤操作：
-
-1. 通过在项目根目录中运行 `pnpm build` 或 `npm run build` 来调用 `next build` 脚本。这将创建一个带有生产就绪管理包的 `.next` 目录。
-2. 最后运行 `pnpm start` 或 `npm run start` 以在生产环境中运行 Node 并从 `.build` 目录提供 Payload 服务。
-3. 当你准备好上线时，请参阅下面的“部署”以获取更多详细信息。
-
 ### 部署到 Vercel
 
 此模板也可以免费部署到 Vercel。你可以通过在模板设置期间选择 Vercel DB 适配器或手动安装和配置它来开始：
 
 ```bash
-pnpm add @payloadcms/db-vercel-postgres
+vercel
+vercel --prod
 ```
-
-```ts
-// payload.config.ts
-import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
-
-export default buildConfig({
-  // ...
-  db: vercelPostgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL || '',
-    },
-  }),
-  // ...
-```
-
-我们还支持 Vercel 的 blob 存储：
-
-```bash
-pnpm add @payloadcms/storage-vercel-blob
-```
-
-```ts
-// payload.config.ts
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-
-export default buildConfig({
-  // ...
-  plugins: [
-    vercelBlobStorage({
-      collections: {
-        [Media.slug]: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
-  ],
-  // ...
-```
-
-如果你需要，还有一个简化的 [一键部署](https://github.com/payloadcms/payload/tree/templates/with-vercel-postgres) 到 Vercel。
-
-### 自托管
-
-在部署应用程序之前，你需要：
-
-1. 确保你的应用程序在生产环境中构建并提供服务。有关更多详细信息，请参阅 [生产环境](#生产环境)。
-2. 然后，你可以像部署任何其他 Node.js 或 Next.js 应用程序一样部署 Payload，可以直接部署在 VPS、DigitalOcean 的 Apps Platform 上，通过 Coolify 部署或更多方式。更多指南即将推出。
-
-你也可以手动部署应用程序，查看 [部署文档](https://payloadcms.com/docs/production/deployment) 了解完整详情。
-
-## 问题
-
-如果你有任何问题或疑问，请在 [Discord](https://discord.com/invite/payload) 上联系我们或发起 [GitHub 讨论](https://github.com/payloadcms/payload/discussions)。
